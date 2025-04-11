@@ -583,7 +583,7 @@
             }
         }
 
-        /* Back to Top Button */
+        /* Back to Top Button - Always visible */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -598,36 +598,38 @@
             align-items: center;
             font-size: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            visibility: hidden;
+            opacity: 1; /* Always visible */
+            visibility: visible; /* Always visible */
             transition: all 0.3s ease;
             z-index: 999;
+            text-decoration: none;
         }
 
-        /* Show the button when not at the top of the page */
-        body:not(:target) .back-to-top {
-            opacity: 1;
-            visibility: visible;
+        /* Icon styling */
+        .back-to-top i {
+            display: inline-block;
+            color: white;
+            font-size: 1.5rem;
+            line-height: 1;
         }
 
-        /* Hide when at the top (home section is target) */
-        body:target .back-to-top {
-            opacity: 0;
-            visibility: hidden;
-        }
-
+        /* Hover effect remains */
         .back-to-top:hover {
             background-color: #e64a19;
             transform: translateY(-5px);
         }
 
-        /* Always show on mobile */
+        /* Mobile adjustment */
         @media (max-width: 675px) {
             .back-to-top {
-                opacity: 1;
-                visibility: visible;
+                width: 45px;
+                height: 45px;
+            }
+            .back-to-top i {
+                font-size: 1.3rem;
             }
         }
+
         </style>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
