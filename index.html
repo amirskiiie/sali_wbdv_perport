@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Sali - IT Specialist</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #01140d;
+            --secondary-color: #18f465;
+            --accent-color: #ff5722;
+            --light-color: #ffffff;
+            --text-color: #ffffff;
+            --text-dark: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: #ff8a65;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(15px, 3vw, 30px);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: clamp(10px, 2vw, 12px) clamp(20px, 3vw, 25px);
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+        
+        .btn:hover {
+            background-color: #e64a19;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        section {
+            padding: clamp(40px, 8vw, 80px) 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: clamp(30px, 5vw, 50px);
+            color: var(--text-color);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: clamp(150px, 40vw, 225px);
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: clamp(10px, 2vw, 15px) auto;
+        }
+
+        .highlight {
+            color: #18f465;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            background: var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            height: 70px;
+            line-height: 70px;
+            padding: 0 10%;
+        }
+        
+        .logo {
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            cursor: pointer;
+            height: 100%;
+            padding: 0 20px;
+            transition: 0.3s;
+        }
+        
+        .nav-item:hover {
+            background: var(--accent-color);
+        }
+        
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            position: relative;
+        }
+        
+        .nav-item:hover .nav-link {
+            color: var(--primary-color);
+        }
+
+        /* Menu Toggle */
+        #check {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            height: min-content;
+            margin: 18px -10px 0 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-toggle .bar {
+            width: 40px;
+            height: 5px;
+            background: var(--text-color);
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: clamp(80px, 15vw, 150px);
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: clamp(30px, 5vw, 50px);
+            width: 100%;
+        }
+        
+        .hero-text {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-text h2 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--text-light);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--text-color);
+            margin-bottom: clamp(15px, 3vw, 20px);
+        }
+        
+        .hero-text .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-light);
+            margin-bottom: clamp(20px, 4vw, 30px);
+            line-height: 1.4;
+        }
+
+        .hero-image {
+            position: relative;
+            flex: 1;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .hero-image::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(300px, 80vw, 500px);
+            height: clamp(300px, 80vw, 500px);
+            background: radial-gradient(circle, #18f465 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-image img {
+            position: relative;
+            z-index: 1;
+            width: clamp(250px, 70vw, 350px);
+            border-radius: 10px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 80%);
+        }
+
+        .hero-image img.asterisk {
+            position: absolute;
+            top: 80%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: clamp(100px, 30vw, 170px);
+            height: clamp(100px, 30vw, 170px);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        .about .section-title {
+            color: var(--primary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(20px, 5vw, 40px);
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+        }
+        
+        .about-text h3 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: clamp(15px, 3vw, 20px);
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .about-text p {
+            margin-bottom: clamp(15px, 3vw, 20px);
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            text-align: justify;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 0;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 5px solid var(--accent-color);
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--secondary-color);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(clamp(300px, 40vw, 350px), 1fr));
+            gap: clamp(20px, 3vw, 30px);
+            justify-content: center;
+        }
+        
+        .portfolio-item {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            color: var(--text-dark);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .portfolio-header {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: clamp(15px, 3vw, 20px);
+            text-align: center;
+        }
+        
+        .portfolio-header h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+        
+        .portfolio-body {
+            padding: clamp(20px, 3vw, 30px);
+        }
+        
+        .portfolio-body ul {
+            list-style-position: inside;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-body li {
+            margin-bottom: clamp(8px, 2vw, 10px);
+            padding-left: 10px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+        
+        .contact .section-title {
+            color: var(--primary-color);
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 30vw, 300px), 1fr));
+            gap: clamp(20px, 3vw, 30px);
+            margin-top: clamp(30px, 5vw, 40px);
+            justify-content: center;
+        }
+        
+        .contact-card {
+            background-color: white;
+            padding: clamp(20px, 3vw, 30px);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-top: 5px solid var(--secondary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-card img {
+            width: clamp(50px, 10vw, 70px);
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: clamp(15px, 3vw, 20px);
+            color: var(--primary-color);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+        
+        .contact-card p {
+            margin-bottom: clamp(10px, 2vw, 15px);
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+        
+        .contact-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            word-break: break-all;
+        }
+
+        .contact-card:hover a {
+            color: var(--accent-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: clamp(20px, 3vw, 30px) 0;
+        }
+        
+        footer p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 10px #18f465;
+            }
+            50% {
+                box-shadow: 0 0 20px #18f465;
+            }
+        }
+
+        /* Applying animations */
+        .hero-text {
+            animation: slideInLeft 1.2s ease forwards;
+        }
+
+        .hero-image {
+            animation: slideInRight 1.2s ease forwards;
+        }
+
+        .section-title {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        /* Animate sections on load */
+        section {
+            opacity: 0;
+            animation: fadeInUp 1.2s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        /* Glowing CTA button */
+        .hero-text .btn {
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .hero-content {
+                flex-direction: row;
+                text-align: left;
+            }
+            
+            .hero-text {
+                text-align: left;
+            }
+            
+            .about-content {
+                flex-direction: row;
+            }
+            
+            .about-text h3,
+            .about-text p {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 935px) {
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-item {
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 675px) {
+            .nav-list {
+                display: grid;
+                position: absolute;
+                background: var(--primary-color);
+                width: 100%;
+                left: 0;
+                top: 70px;
+                z-index: -1;
+                transform: translateY(-150%);
+                transition: 0.3s;
+            }
+
+            .nav-item {
+                padding-left: 35px;
+            }
+
+            .menu-toggle {
+                display: grid !important;
+            }
+
+            #check:checked ~ header .nav-list {
+                transform: translateY(0);
+            }
+
+            #check:checked ~ header .menu-toggle {
+                margin-top: 35px;
+            }
+
+            #check:checked ~ header .menu-toggle .bar:nth-child(1) {
+                position: absolute;
+                transform: rotate(45deg);
+            }
+
+            #check:checked ~ header .menu-toggle .bar:nth-child(2) {
+                display: none;
+            }
+
+            #check:checked ~ header .menu-toggle .bar:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        /* Show the button when not at the top of the page */
+        body:not(:target) .back-to-top {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hide when at the top (home section is target) */
+        body:target .back-to-top {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .back-to-top:hover {
+            background-color: #e64a19;
+            transform: translateY(-5px);
+        }
+
+        /* Always show on mobile */
+        @media (max-width: 675px) {
+            .back-to-top {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <input type="checkbox" id="check" />
+    
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Amir<span>Sali</span></div>
+            <label for="check" class="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </label>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-image">
+                    <img src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/488578564_1753026272308839_8898337114304572213_n.png?_nc_cat=100&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeHT_bSyhx9B7fP0GXbtMwmKpcxnfT_6qymlzGd9P_qrKenDFZJppjs-KlcT53qVIekCvlTqESyOvwOwT2HwcmLD&_nc_ohc=EzLenzJBjOMQ7kNvwExTu0z&_nc_oc=AdlS3Q3YJbOH_e3o92v5PTYn6nXpBhPSj6vwfTIoDDXYefiZuMGS6PM9PA8VNXeJnjo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl30-2.fna&oh=03_Q7cD2AHQK4PGBqhwjPJalcFBy0I1l5zXZ8hAZ8R4_8G8lsFrNA&oe=681DD346" alt="Amir's Photo">
+                    <img src="https://scontent.fmnl30-3.fna.fbcdn.net/v/t1.15752-9/490315744_1383567776204840_644429362134776118_n.png?_nc_cat=105&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeEGYlknlDQeWKAFe9sh0UIBt8y-ZkWlwj63zL5mRaXCPr4GvuM1JhTIUaQUOpe-f_jqI0JKsREvOcQw9NIBuA3A&_nc_ohc=jQuQem1buk4Q7kNvwEML2jb&_nc_oc=AdnTn6Z9GNmXRXIsiOlH7YtDJoEpCPGVQoKVhBuQgKtVb03M65bfnf8WVMRiKk2y9Yg&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl30-3.fna&oh=03_Q7cD2AGXGJRsYusaBqaqVPmhVP7L8RAVv2JR-ztbLxMoGetcSA&oe=681DE2E2" alt="asterisk" class="asterisk">
+                </div>
+                <div class="hero-text">
+                    <h2>Hi, I am</h2>
+                    <h1>Amir!</h1>
+                    <p class="subtitle">an <span class="highlight"><strong>IT Specialist</strong></span> specialized in<br><span class="highlight"><strong>Technical Support</strong></span></p>
+                    <a href="#about" class="btn">WANT TO KNOW MORE?</a>
+                </div>
+            </div>        
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">ABOUT ME</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>KIMAR AMIREL B. SALI</h3>
+                    <p>Hi! I'm Kimar Amirel B. Sali, but you can call me Amir. I was born on December 27, 2005, and I currently live in Bagong Silangan, Quezon City. I'm pursuing a Bachelor of Science in Information Technology at Our Lady of Fatima University, where I'm passionate about learning and developing skills in the tech world.</p>
+                    <p><br>In my free time, I enjoy playing online games, watching movies and series, and listening to music. Beyond my studies, I have a fulfilling part-time role at my previous school, where I teach students how to play the Lyre instrument — a job I truly love and find rewarding. Connecting with others through music and education brings me a lot of joy.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://scontent.fmnl30-1.fna.fbcdn.net/v/t1.15752-9/487444476_1386316926117746_6406901921395867789_n.png?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeHtP_CBU-wcBdnIiE2Vekw74E5ed9Mcj_ngTl530xyP-VmckfLgDwv_eFBYTYkYPa4i7GTj4siFvbgyx5whCSBb&_nc_ohc=9xTMNV2U5CoQ7kNvwHUVBDz&_nc_oc=AdniUO1enIgnk6zbNvvYndXD4Sfg_L11CZio-C1lDKgMEq2I83TAQjdxpSgjlXJ_KAQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl30-1.fna&oh=03_Q7cD2AEgPlieoeTRc-lUjRq-Z8hHZQiP8q-9ftNdT96Ok7S9kg&oe=681DDFB0" alt="Amir Sali">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">PORTFOLIO</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <h3>Achievements</h3>
+                    </div>
+                    <div class="portfolio-body">
+                        <ul>
+                            <li>Elementary, With Honors (2015–2018)</li>
+                            <li>Elementary Graduate, With Honors (2018)</li>
+                            <li>IOLS Katutubong Awit 1st Place (2016)</li>
+                            <li>IOLS Katutubong Awit 1st Place (2017)</li>
+                            <li>Junior High School, With High Honor (2019–2022)</li>
+                            <li>IOLS Battle of The Band 2nd Runner Up (2019)</li>
+                            <li>Junior High School Graduate, With High Honor (2022)</li>
+                            <li>Senior High School, With High Honor (2022–2024)</li>
+                            <li>Senior High School Graduate, With High Honor (2024)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-header">
+                        <h3>Experiences</h3>
+                    </div>
+                    <div class="portfolio-body">
+                        <ul>
+                            <li>Elementary Class President (2015–2017)</li>
+                            <li>BCPC Ginoong Kalikasan, Elementary Category (2017)</li>
+                            <li>Candidate for Supreme Student Government (SSG) Vice-President (2023)</li>
+                            <li>Supreme Student Government (SSG) Councilor (2024)</li>
+                            <li>IOLS Star of the Night (2024)</li>
+                            <li>IOLS Drum and Lyre Band Coach (2024–2025)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section-->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT DETAILS</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <img src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/489123328_1376614547097077_8659603917507502083_n.png?_nc_cat=111&ccb=1-7&_nc_sid=0024fc&_nc_ohc=KFCnlpagTXoQ7kNvwEeK9CO&_nc_oc=Adk1-XOd2co4MtwyjxcHvTtWMSAUJzmA9XgRWPq783DARmKjdwbknEU8K3tYbRcfbwc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl30-2.fna&oh=03_Q7cD2AEWvjd4-RNZ9OuvVtOBXnKb8E0OmXbc6AtRjT9h-DyHLQ&oe=681E23B4" alt="Cellphone Icon">
+                    <h3>PHONE & E-MAIL</h3>
+                    <p><strong>Call or Text:</strong></p>
+                    <p>+63 938 230 4475</p>
+                    <p><strong>E-Mail:</strong></p>
+                    <a href="mailto:amirelbulabos@gmail.com" class="email">amirelbulabos@gmail.com</a>
+                </div>
+    
+                <div class="contact-card">
+                    <img src="https://scontent.fmnl30-2.fna.fbcdn.net/v/t1.15752-9/487812528_2635827916617023_1259459118513439267_n.png?_nc_cat=110&ccb=1-7&_nc_sid=0024fc&_nc_ohc=PSOK7OQ-lq8Q7kNvwGDFi_u&_nc_oc=AdmhcKJldbNlauGV-WlRZFtBXUoQagDAPEx8Pz_emGvwVuEcflLc1E-w_aRSssImKZs&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl30-2.fna&oh=03_Q7cD2AE_LIdLcZqJPj48eue2SjCz3CXVJAR4Wy-b4Ufbwfs-uA&oe=681E0B72" alt="Social Media Icon">
+                    <h3>SOCIAL MEDIA</h3>
+                    <p><strong>Facebook:</strong></p>
+                    <a href="https://www.facebook.com/amirskiiie">Amir Sali</a>
+                    <p><strong>Instagram:</strong></p>
+                    <a href="https://www.instagram.com/amirskrrrt/">@amirskrrrt</a>
+                </div> 
+    
+                <div class="contact-card">
+                    <img src="https://scontent.fmnl30-1.fna.fbcdn.net/v/t1.15752-9/488834182_1296222224805693_8180994487642321948_n.png?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_ohc=IjDvG3qJ1TEQ7kNvwEa5nOv&_nc_oc=Admj3qWfzx1XgEriumoEGN921lcarF19CWTGkwkOeYbeTw6-o5W44DvAQ1ngOmgqpQo&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fmnl30-1.fna&oh=03_Q7cD2AFRNZdhB8K4ITOZ_Ih09zebIElszTyTpdWeYuSHU0kVrg&oe=681E174D" alt="Location Icon">
+                    <h3>ADDRESS</h3>
+                    <p><strong>Home Address:</strong></p>
+                    <a href="https://maps.app.goo.gl/Xk7yUswEwotukcWy7">#35 Mark St. Filheights Subd.<br>Bagong Silangan<br>Quezon City</a>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <!-- Back to Top Button - Modified link -->
+    <a href="#home" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <!-- Add this empty anchor at the bottom of your page -->
+    <div id="back-to-top"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 <span class="logo">Amir<span>Sali</span></span> All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
